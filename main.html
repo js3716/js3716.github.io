@@ -10,8 +10,8 @@
 
 <body>
     <div class="main-background">
-        <h4 class="main-title"> Buy Our flower!</h4>
-        <div class="sub-background">
+        <h4 class="main-title"> 화초맘 홈페이지</h4>
+        <div class="mainsub-background">
             <h3>
                 <ul>
                     <li>전 지역 택배로 나무를 배송</li>
@@ -25,8 +25,21 @@
     </div>
     <div class="table-background" id="flowerTable"></div>
     <br> <br> <br> <br> <br>
+    <button id="sortPriceBtn">가격순으로 정렬</button>
 
     <div class="sub-background">
+        <label for="name" class="form-label">■ 이름 *</label><br>
+        <input type="text" class="form-control mb-2" id="name" name="name" maxlength="50" placeholder="이름을 입력하세요"
+            style="width: 50%; display: inline;" required><br>
+
+
+        전화번호:
+        <input type="number" value="010" style="width: 20%;" maxlength="4">-
+        <input type="number" style="width: 20%;" maxlength="4">-
+        <input type="number" style="width: 20%;" maxlength="4">
+
+        <br>
+
         <label for="zipp_btn" class="form-label">■ 주소 *</label><br />
         <input type="text" class="form-control mb-2" id="zipp_code_id" name="zipp_code" maxlength="10"
             placeholder="우편번호" style="width: 50%; display: inline;">
@@ -37,24 +50,76 @@
         <input type="text" class="form-control" name="user_add2" id="UserAdd2" maxlength="40"
             placeholder="상세 주소를 입력하세요">
     </div>
+<!-- Google Form을 담을 div -->
+<div id="googleFormContainer" style="text-align: center;"></div>
+
+<script>
+    // Google Form을 불러와서 특정 div에 삽입하는 함수
+    function loadGoogleForm() {
+        // Google Form의 링크를 여기에 넣어주세요
+        var googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSeCOgu-cizP_e61LwGZYn528jqisapX7LHqjtBv4WDbTRVqFg/viewform?usp=sf_link";
+
+        // Google Form을 담을 div 선택
+        var formContainer = document.getElementById("googleFormContainer");
+
+        // Google Form iframe 생성
+        var iframe = document.createElement("iframe");
+        iframe.setAttribute("src", googleFormURL);
+        iframe.setAttribute("width", "640");
+        iframe.setAttribute("height", "800");
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("marginheight", "0");
+        iframe.setAttribute("marginwidth", "0");
+        iframe.setAttribute("loading", "lazy");
+        formContainer.appendChild(iframe);
+    }
+
+    // 페이지 로드 시 Google Form 로드
+    window.onload = function() {
+        loadGoogleForm();
+    };
+</script>
+
+
+
+
     <script>
         var flowerData = [
-            { name: '1', image: '1.png', price: '$10' },
+            { name: '1', image: '1.png', price: '$20' },
             { name: '2', image: '2.png', price: '$15' },
             { name: '3', image: '3.png', price: '$20' },
             { name: '4', image: '4.png', price: '$40' },
             { name: '5', image: '5.png', price: '$30' },
         ];
-
         var flowerTable = document.getElementById('flowerTable');
-        var tableHTML = '<table>';
-        flowerData.forEach(function (flower) {
-            tableHTML += '<tr>';
-            tableHTML += '<td style="width: 33%;"><img src="' + flower.image + '" alt="Pink Flower" style="height: 20%;"><br>' + flower.name + '번<br>가격: ' + flower.price + '</td>';
-            tableHTML += '</tr>';
-        });
-        tableHTML += '</table>';
-        flowerTable.innerHTML = tableHTML;
+
+        // 정렬 함수
+        function sortFlowersByPrice() {
+            flowerData.sort(function (a, b) {
+                // 가격을 문자열에서 숫자로 변환하여 비교
+                return parseFloat(a.price.slice(1)) - parseFloat(b.price.slice(1));
+            });
+            renderFlowers(); // 정렬 후 화면 갱신
+        }
+
+        // 화면에 꽃 정보를 출력하는 함수
+        function renderFlowers() {
+            var tableHTML = '<table>';
+            flowerData.forEach(function (flower) {
+                tableHTML += '<tr>';
+                tableHTML += '<td style="width: 33%;"><img src="' + flower.image + '" alt="Pink Flower" style="height: 20%;"><br>' + flower.name + '번<br>가격: ' + flower.price + '</td>';
+                tableHTML += '</tr>';
+            });
+            tableHTML += '</table>';
+            flowerTable.innerHTML = tableHTML;
+        }
+
+        // 초기화면 출력
+        renderFlowers();
+
+        // 정렬 버튼 클릭 이벤트 추가
+        document.getElementById('sortPriceBtn').addEventListener('click', sortFlowersByPrice);
+
     </script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!-- CDN 방식 사용 -->

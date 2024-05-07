@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="css/main.css" rel="stylesheet">
+    <!-- css를 사용할 거면 css파일 만들고 link를 사용 -->
+</head>
+
+<body>
+    <div class="main-background">
+        <h4 class="main-title"> Buy Our flower!</h4>
+        <div class="sub-background">
+            <h3>
+                <ul>
+                    <li>전 지역 택배로 나무를 배송</li>
+                    <li>가격은 택배비 포함입니다</li>
+                    <li>노지에서 비보약 먹고 자란 거라 뿌리가 튼튼하고 화분 째 하나 당 30분동안 꼼꼼하게 포장해서 우체국 택배로 안전하게 배송해서 뿌리가 다치지 않아 쑥쑥 큽니다</li>
+                    <li>2만원부터 다양한 나무가 더 많이 있으니 원하는 가격대가 있으시면 문자로 문의 주세요</li>
+                    <li>이름, 전화번호, 주소, 나무 번호를 010 5243 5798로 보내주세요</li>
+                </ul>
+            </h3>
+        </div>
+    </div>
+    <div class="table-background" id="flowerTable"></div>
+    <br> <br> <br> <br> <br>
+    <div class="sub-background">
+        <form>
+            이름: <input type="text"><br>
+            전화번호: <input type="number" value="010" style="width: 50px;">-<input type="number"
+                style="width: 50px;">-<input type="number" style="width: 50px;"><br>
+            주소: <input type="text"><br>
+            <button>제출</button>
+        </form>
+    </div>
+
+    <script>
+        var flowerData = [
+            { name: '1', image: '1.png', price: '$10' },
+            { name: '2', image: '2.png', price: '$15' },
+            { name: '3', image: '3.png', price: '$20' },
+			{ name: '4', image: '4.png', price: '$40' },
+			{ name: '5', image: '5.png', price: '$30' },
+        ];
+
+        var flowerTable = document.getElementById('flowerTable');
+        var tableHTML = '<table>';
+        flowerData.forEach(function (flower) {
+            tableHTML += '<tr>';
+            tableHTML += '<td style="width: 33%;"><img src="' + flower.image + '" alt="Pink Flower" style="height: 20%;"><br>' + flower.name + '번<br>가격: ' + flower.price + '</td>';
+            tableHTML += '</tr>';
+        });
+        tableHTML += '</table>';
+        flowerTable.innerHTML = tableHTML;
+    </script>
+</body>
+
+</html>

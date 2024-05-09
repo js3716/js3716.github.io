@@ -21,7 +21,13 @@
     padding: 10px 20px; /* 내부 여백 */
     margin: 0 5px; /* 외부 여백 */
     border-radius: 5px; /* 테두리 모서리 둥글게 */
+    width: auto; /* 홈페이지 크기에 맞게 자동 조정 */
+    font-size: 1.1em; /* 폰트 크기를 em 단위로 설정하여 자동 조정 */
+    white-space: nowrap; /* 텍스트가 한 줄에 나타나도록 설정 */
+    font-weight: bold; /* 폰트를 굵게 설정 */
   }
+  
+  
 .mainsub-background {
     width: 80%;
     max-width: 800px;
